@@ -23,4 +23,4 @@ FastAPI application to synchronize 2 different Spotify accounts and copy their l
     $ docker build -t stivenramireza/spotify-sync:latest .
     $ docker push stivenramireza/spotify-sync:latest
 	$ export DOMAIN=<DOMAIN>
-    $ docker stack deploy -c stack.yml spotify-sync --with-registry-auth
+    $ docker stack deploy -c stack.yml production --with-registry-auth
