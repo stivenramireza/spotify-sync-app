@@ -1,6 +1,6 @@
 version: '3'
 services:
-  spotify-sync-app:
-    image: spotify-sync-app:latest
+  spotify-sync:
+    image: stivenramireza/spotify-sync:latest
     ports:
       - "8000:8000"

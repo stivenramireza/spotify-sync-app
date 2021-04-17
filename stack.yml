@@ -1,0 +1,26 @@
+version: '3'
+services:
+  spotify-sync:
+    image: stivenramireza/spotify-sync:latest
+    ports:
+      - 8000
+    networks:
+      - traefik-public
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.middlewares.spotify-sync-https.stripprefix.prefixes=/
+        - traefik.http.routers.spotify-sync-http.rule=Host(`${DOMAIN?Variable not set}`) && PathPrefix(`/`)
+        - traefik.http.routers.spotify-sync-http.entrypoints=http
+        - traefik.http.routers.spotify-sync-http.middlewares=https-redirect
+        - traefik.http.routers.spotify-sync-https.rule=Host(`${DOMAIN?Variable not set}`) && PathPrefix(`/`)
+        - traefik.http.routers.spotify-sync-https.middlewares=spotify-sync-https
+        - traefik.http.routers.spotify-sync-https.entrypoints=https
+        - traefik.http.routers.spotify-sync-https.tls=true
+        - traefik.http.routers.spotify-sync-https.tls.certresolver=le
+        - traefik.http.services.spotify-sync.loadbalancer.server.port=8000
+networks:
+  traefik-public:
+    external: true

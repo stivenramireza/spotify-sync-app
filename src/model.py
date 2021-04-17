@@ -7,5 +7,5 @@ class Account(BaseModel):
     oauth_token_2: str = Form(...)
 
     @classmethod
-    def as_form(cls, oauth_token_1: str = Form(...), oauth_token_2: str = Form(...)):
+    def as_form(cls, oauth_token_1: str = Form(...), oauth_token_2: str = Form(...)) -> object:
         return cls(oauth_token_1=oauth_token_1, oauth_token_2=oauth_token_2)

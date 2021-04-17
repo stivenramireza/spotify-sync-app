@@ -10,12 +10,12 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-def synchronize(request: Request):
+def synchronize(request: Request) -> object:
     return templates.TemplateResponse('spotify_sync.html', {"request": request})
 
 
 @app.post("/synchronize")
-def synchronize_accounts(request: Request, account: Account = Depends(Account.as_form)):
+def synchronize_accounts(request: Request, account: Account = Depends(Account.as_form)) -> object:
     try:
         filter_tracks_for_user(account.oauth_token_1, account.oauth_token_2)
         return templates.TemplateResponse('success_spotify_sync.html', {"request": request})
