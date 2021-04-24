@@ -1,5 +1,3 @@
-from typing import List, Dict, Any
-
 from src.data_access import (
     get_user_saved_tracks,
     save_tracks_for_user
@@ -8,7 +6,7 @@ from src.data_access import (
 import pandas as pd
 
 
-def filter_user_saved_tracks(oauth_token: str) -> List[Dict[str, Any]]:
+def filter_user_saved_tracks(oauth_token: str) -> list:
     current_tracks = [None]
     saved_tracks = []
     offset = 0

@@ -1,9 +1,7 @@
-from typing import Any
-
 import requests
 
 
-def get_user_saved_tracks(oauth_token: str, offset: int) -> Any:
+def get_user_saved_tracks(oauth_token: str, offset: int) -> any:
     try:
         headers = {
             'Authorization': f'Bearer {oauth_token}'
@@ -15,7 +13,7 @@ def get_user_saved_tracks(oauth_token: str, offset: int) -> Any:
         return f'Error to get user saved tracks: {error}'
 
 
-def save_tracks_for_user(oauth_token: str, ids: str) -> Any:
+def save_tracks_for_user(oauth_token: str, ids: str) -> any:
     try:
         headers = {
             'Authorization': f'Bearer {oauth_token}'
