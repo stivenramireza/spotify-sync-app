@@ -8,7 +8,7 @@ FastAPI application to synchronize 2 different Spotify accounts and copy their l
 
 ## App in production
 
-https://spotify-sync.stivenramireza.com/
+https://spotify.stivenramireza.com/
 
 ## Run app in development mode
 
