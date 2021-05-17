@@ -91,7 +91,7 @@ def filter_user_playback(oauth_token: str, recent_tracks: list) -> None:
             for recent_track in reversed(recent_tracks):
                 status_code = start_user_playback(oauth_token, recent_track['album_id'], recent_track['track_number'])
                 if status_code == 204:
-                    time.sleep(5)
+                    time.sleep(7)
             logger.info(f'Recent tracks have been played successfully')
         except Exception as error:
             logger.error(f'Error to filter user playback: {error}')
