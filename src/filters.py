@@ -3,7 +3,8 @@ from src.data_access import (
     save_tracks_for_user,
     get_user_recently_played_tracks,
     get_album_tracks,
-    start_user_playback
+    start_user_playback,
+    get_user_playlists
 )
 
 from src.logger import logger
@@ -96,3 +97,40 @@ def filter_user_playback(oauth_token: str, recent_tracks: list) -> None:
         except Exception as error:
             logger.error(f'Error to filter user playback: {error}')
             raise
+
+
+def filter_user_playlists(oauth_token: str) -> list:
+    try:
+        current_playlists = [None]
+        saved_playlists = []
+        offset = 0
+        while len(current_playlists) != 0:
+            data = get_user_playlists(oauth_token, offset)
+            df = pd.DataFrame(data)
+            df = df.filter(['items'])
+            df = pd.json_normalize(df.to_dict('records'))
+            df = df.filter(['items.id'])
+            current_playlists = [playlist for playlist in df.to_dict('records')]
+            for saved_playlist in current_playlists:
+                saved_playlists.append(saved_playlist)
+            offset += 50
+        logger.info('User playlists have been filtered successfully')
+        return saved_playlists
+    except Exception as error:
+        logger.error(f'Error to filter user playlists: {error}')
+        raise
+
+
+def filter_playlists_for_user(oauth_token_1: str, oauth_token_2: str) -> None:
+    try:
+        saved_playlists = filter_user_playlists(oauth_token_1)
+        df_saved_playlists = pd.DataFrame(saved_playlists)
+        saved_playlists_list = df_saved_playlists['items.id'].tolist()
+        for playlist_id in saved_playlists_list:
+            status_code = follow_playlist(oauth_token_2, playlist_id)
+            if status_code == 204:
+                time.sleep(2)
+        logger.info(f'Playlists for user have been followed successfully')
+    except Exception as error:
+        logger.info(f'Error to filter playlists for user: {error}')
+        raise
