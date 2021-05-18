@@ -1,6 +1,6 @@
 # Spotify Sync App
 
-FastAPI application to synchronize 2 different Spotify accounts and copy their liked and recently played songs.
+FastAPI application to synchronize 2 different Spotify accounts and copy their liked and recently played tracks and playlists.
 
 <p align="center">
 <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2018/10/Spotify_Premium_Update.jpg">
