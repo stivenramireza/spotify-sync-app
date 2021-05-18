@@ -67,3 +67,28 @@ def start_user_playback(oauth_token: str, album_id: int, track_number: int) -> a
         return r.status_code
     except requests.exceptions.HTTPError as error:
         return f'Error to start user playback: {error}'
+
+
+def get_user_playlists(oauth_token: str, offset: int) -> any:
+    try:
+        headers = {
+            'Authorization': f'Bearer {oauth_token}'
+        }
+        r = requests.get(f'https://api.spotify.com/v1/me/playlists?limit=50&offset={offset}', headers=headers)
+        r.raise_for_status()
+        return r.json()
+    except requests.exceptions.HTTPError as error:
+        return f'Error to get user playlists: {error}'
+
+
+def follow_playlist(oauth_token: str, playlist_id: int) -> any:
+    try:
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {oauth_token}'
+        }
+        r = requests.put(f'https://api.spotify.com/v1/playlists/{playlist_id}/followers', data={}, headers=headers)
+        r.raise_for_status()
+        return r.status_code
+    except requests.exceptions.HTTPError as error:
+        return f'Error to follow playlist: {error}'
