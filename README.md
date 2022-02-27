@@ -12,6 +12,8 @@ https://spotify.stivenramireza.com/
 
 ## Run app in development mode
 
+    $ python3 -m venv spotify
+    $ source spotify/bin/activate
     $ pip install -r requirements.txt
     $ export PYTHON_ENV=development
     $ uvicorn src.main:app --reload
@@ -26,5 +28,4 @@ https://spotify.stivenramireza.com/
 
     $ docker build -t stivenramireza/spotify-sync:latest .
     $ docker push stivenramireza/spotify-sync:latest
-	$ export DOMAIN=<DOMAIN>
-    $ docker stack deploy -c stack.yml production --with-registry-auth
+    $ docker stack deploy -c stack.yml spotify --with-registry-auth
