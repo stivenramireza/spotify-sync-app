@@ -6,10 +6,6 @@ FastAPI application to synchronize 2 different Spotify accounts and copy their l
 <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2018/10/Spotify_Premium_Update.jpg">
 </p>
 
-## App in production
-
-https://spotify.stivenramireza.com/
-
 ## Run app in development mode
 
     $ python3 -m venv spotify
